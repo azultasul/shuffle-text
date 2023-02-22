@@ -15,10 +15,10 @@ const sayHover = [
   "안녕하세요",
 ]
 
-const hoverTarget = document.querySelector(".shuffle-event-target")
+const hoverTarget = document.querySelector(".shuffle-hover-target")
 const initData = { // 사용자 설정
-  textArray: sayAuto,
-  playType: 'hover', // 'auto' / 'hover' / 'click'
+  textArray: sayHover,
+  playType: 'hover', // 'auto' / 'hover'
   stayTime: 1500, 
   replaceTime: 100, 
   isDisorder: true, // true / false
@@ -38,11 +38,10 @@ const data = {
   totalReplaceTime: 0,
 };
 
-let setReplaceTime;
 const replaceText = (sayArray) => {
   // console.log("replaceText");
   data.playIndex.forEach((text, index) => {
-    setReplaceTime = setTimeout(() => {
+    setTimeout(() => {
       data.currentSay[text] = `<span>${data.nextText[text]}</span>`
       
       if (index == (data.playIndex.length - 1)) {
@@ -112,17 +111,16 @@ const compareLength = (item) => {
   }
 }
 
-let setAutoTime;
+let setTime;
 let sayIndex = 1;  // next index
 const playAutoType = () => {
   // console.log("playAutoType -------");
-  setAutoTime = setTimeout(() => {
+  setTime = setTimeout(() => {
     play();
     playAutoType();
   }, data.totalReplaceTime + (data.stayTime));
 }
 const play = () => {
-  // console.log("data", data);
   data.replaceIndex = [];
   data.playIndex = [];
   compareLength(data.say[sayIndex]); // item은 say에서 next item
@@ -130,7 +128,7 @@ const play = () => {
 }
 
 const shuffleArray = (array) => {
-  // console.log("shuffleArray");
+  // console.log("''shuffleArray");
   let currentIndex = array.length;
   let randomIndex;
   while (0 !== currentIndex) {
@@ -143,7 +141,7 @@ const shuffleArray = (array) => {
 
 const shuffleTarget = document.querySelector(".shuffle-target")
 const insertHtml = () => {
-  // console.log("insertHtml");
+  console.log("insertHtml");
   let htmlText = ''
   data.currentSay.forEach(el => {
     htmlText = htmlText + el
@@ -151,23 +149,28 @@ const insertHtml = () => {
   shuffleTarget.innerHTML = htmlText
 }
 
-const init = () => {
+const init = (textArray, playType, replaceTime, isRandom, hoverTarget) => {
   data.say = initData.isDisorder ? shuffleArray(initData.textArray) : initData.textArray;
   data.txtLength = data.say.map(item => item.length);
 
   data.say[0].split('').forEach(txt => {
     data.currentSay.push(`<span>${txt}</span>`);
   })
-  data.stayTime = initData.stayTime;
-  data.replaceTime = initData.replaceTime;
   
+  if (initData.replaceTime) {
+    data.stayTime = initData.stayTime;
+    data.replaceTime = initData.replaceTime;
+  } else {
+    data.stayTime = 2000;
+    data.replaceTime = 100;
+  }
   // console.log("data ---", data);
 
   if (initData.playType == 'auto') {
     playAutoType();
   } else if (initData.playType == 'hover') {
     initData.hoverTarget.addEventListener('mouseenter', e => {
-      console.log("mouseenter", data.nextText);
+      console.log("mouseenter");
       e.preventDefault();
       play();
     });
@@ -176,7 +179,7 @@ const init = () => {
       e.preventDefault();
       play();
     });
-  } else if (initData.playType == 'click') {
+
     initData.hoverTarget.addEventListener('click', e => {
       e.preventDefault();
       play();
