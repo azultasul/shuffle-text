@@ -25,13 +25,13 @@
     settings = {
       shuffleTarget: options.shuffleTarget || null,
       playType: options.playType || null,
-      isReplacedRandomly: options.isReplacedRandomly || true,
-      isOrderedArray: options.isOrderedArray || false,
+      isReplacedRandomly: options.isReplacedRandomly || false,
+      isDisorderedArray: options.isDisorderedArray || false,
       stayTime: options.stayTime || 1500,
       replaceTime: options.replaceTime || 100,
       shuffleTarget: document.querySelector(`${target}`),
     }
-    data.say = settings.isOrderedArray ? shuffleArray(options.textArray) : options.textArray;
+    data.say = settings.isDisorderedArray ? shuffleArray(options.textArray) : options.textArray;
     data.txtLength = data.say.map(item => item.length);
   
     data.say[0].split('').forEach(txt => {
