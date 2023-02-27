@@ -5,28 +5,15 @@
 })(this, (function () { 'use strict';
 
   /**
-   * ShuffleText 
+   * ShuffleText 1.0
    * @author Tasul, azultasul@gmail.com
-   */
-
-  // let ShuffleText
-  // let settings = {}
-  // const data = {
-  //   say: [],
-  //   txtLength: [],
-  //   currentSay: [],
-  //   nextText: [],
-  //   replaceIndex: [],
-  //   playIndex: [],
-  //   totalReplaceTime: 0,
-  // };
+  */
 
   const ShuffleText = (function() {
-    let instanceId = 0;
 
     function ShuffleText(target, options) {
       const _ = this;
-      console.log("this", _);
+
       _.data = {
         say: [],
         txtLength: [],
@@ -35,49 +22,46 @@
         replaceIndex: [],
         playIndex: [],
         totalReplaceTime: 0,
-        setAutoTime: null,
-        setReplaceTime: null,
+        setAutoTimeout: null,
+        setReplaceTimeout: null,
         sayIndex: 1,
       }
       _.settings = {
-        shuffleTarget: options.shuffleTarget || null,
-        playType: options.playType || null,
+        textArray: options.textArray || [],
+        isAuto: options.isAuto || false,
         isReplacedRandomly: options.isReplacedRandomly || false,
         isDisorderedArray: options.isDisorderedArray || false,
         stayTime: options.stayTime || 1500,
         replaceTime: options.replaceTime || 100,
         shuffleTarget: document.querySelector(`${target}`),
       }
-      _.data.say = _.settings.isDisorderedArray ? _.shuffleArray(options.textArray) : options.textArray;
+      _.data.say = _.settings.isDisorderedArray ? _.shuffleArray(_.settings.textArray) : _.settings.textArray;
       _.data.txtLength = _.data.say.map(item => item.length);
     
       _.data.say[0].split('').forEach(txt => {
         _.data.currentSay.push(`<span>${txt}</span>`);
       })
   
-      _.insertHtml(_.settings.shuffleTarget);
-      if (_.settings.playType == 'auto') {
+      _.insertHtml();
+      if (_.settings.isAuto) {
         _.playAuto();
       }
-      _.instanceId = instanceId++;
     }
 
     return ShuffleText;
   }());
   
-
-  // let setReplaceTime;
   ShuffleText.prototype.replaceText = function() {
     const _ = this;
-    clearTimeout(_.setReplaceTime)
+    clearTimeout(_.setReplaceTimeout)
     _.data.playIndex.forEach((text, index) => {
-      _.setReplaceTime = setTimeout(() => {
+      _.setReplaceTimeout = setTimeout(() => {
         _.data.currentSay[text] = `<span>${_.data.nextText[text]}</span>`
         
         if (index == (_.data.playIndex.length - 1)) {
           _.data.currentSay = _.data.currentSay.filter((el) => el !== '<span></span>')
         }
-        _.insertHtml(_.settings.shuffleTarget);
+        _.insertHtml();
       }, _.settings.replaceTime * (index))
     })
   }
@@ -141,16 +125,15 @@
     }
   }
 
-  // let setAutoTime;
-  // let sayIndex = 1;  // next index
   ShuffleText.prototype.playAuto = function() {
     const _ = this;
-    clearTimeout(_.setAutoTime)
-    _.setAutoTime = setTimeout(() => {
+    clearTimeout(_.setAutoTimeout)
+    _.setAutoTimeout = setTimeout(() => {
       _.play();
       _.playAuto();
     }, _.data.totalReplaceTime + (_.settings.stayTime));
   }
+
   ShuffleText.prototype.play = function() {
     const _ = this;
     _.data.replaceIndex = [];
@@ -170,19 +153,19 @@
     return array;
   }
 
-  ShuffleText.prototype.insertHtml = function(target) {
+  ShuffleText.prototype.insertHtml = function() {
     const _ = this;
     let htmlText = ''
     _.data.currentSay.forEach(el => {
       htmlText = htmlText + el
     });
-    target.innerHTML = htmlText
+    _.settings.shuffleTarget.innerHTML = htmlText
   }
 
   ShuffleText.prototype.clear = () => {
     const _ = this;
-    clearTimeout(_.setReplaceTime)
-    clearTimeout(_.setAutoTime)
+    clearTimeout(_.setReplaceTimeout)
+    clearTimeout(_.setAutoTimeout)
   }
 
   return ShuffleText;
