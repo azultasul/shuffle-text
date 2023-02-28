@@ -1,6 +1,6 @@
 {
   "name": "@tasul/shuffle-text",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "JavaScript library for text switching effects",
   "main": "shuffleText.js",
   "scripts": {
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com-tasul:azultasul/shuffle-text.git"
+    "url": "https://github.com/azultasul/shuffle-text"
   },
   "keywords": [
     "shuffle",
@@ -18,5 +18,5 @@
     "array"
   ],
   "author": "tasul",
-  "license": "ISC"
+  "license": "MIT"
 }
