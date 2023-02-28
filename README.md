@@ -80,4 +80,4 @@ Method | Description
 :---|:---
 clear | Destroy ShuffleText
 play | Shuffle text once
-playAuto | Start shuffling automatically (Add to any event you want)# ShuffleText
+playAuto | Start shuffling automatically (Add to any event you want)
