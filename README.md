@@ -3,13 +3,19 @@
 'ShuffleText' is a JavaScript library for text switching effects.  
 You can switch any words or sentences you want to show randomly or in order.
 
+## 📌 Install
+
+```jsx
+npm i @tasul/shuffle-text
+```
+
 ## 📌 Basic Usage
 
 ```jsx
 // html
 <div class="my-target"></div>
 
-// script
+// js
 // const myShuffle = new ShuffleText(target, options)
 const shuffleText = new ShuffleText(".my-target", {
   textArray: [ "Hello", "Yo!", "¡Hola!", "Salut", "Ciao", "안녕하세요", "こんにちは" ],
@@ -22,7 +28,7 @@ const shuffleText = new ShuffleText(".my-target", {
 ```
 
 ### Cases
-
+![shshsh](https://user-images.githubusercontent.com/105263749/221733853-af06dcfe-5b74-491d-a9a9-aac4b13a8ee6.gif)
 ```jsx
 // case 1
 const shuffleText1 = new ShuffleText(".my-target-1", {
