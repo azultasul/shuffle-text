@@ -1,0 +1,22 @@
+{
+  "name": "@tasul/shuffle-text",
+  "version": "1.0.0",
+  "description": "JavaScript library for text switching effects",
+  "main": "shuffleText.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com-tasul:azultasul/shuffle-text.git"
+  },
+  "keywords": [
+    "shuffle",
+    "switch",
+    "text",
+    "letters",
+    "array"
+  ],
+  "author": "tasul",
+  "license": "ISC"
+}
