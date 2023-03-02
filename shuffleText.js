@@ -162,10 +162,10 @@
     _.settings.shuffleTarget.innerHTML = htmlText
   }
 
-  ShuffleText.prototype.clear = () => {
+  ShuffleText.prototype.clear = function() {
     const _ = this;
-    clearTimeout(_.setReplaceTimeout)
-    clearTimeout(_.setAutoTimeout)
+    clearTimeout(_.data.setReplaceTimeout)
+    clearTimeout(_.data.setAutoTimeout)
   }
 
   return ShuffleText;
