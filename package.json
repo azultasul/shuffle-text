@@ -1,6 +1,6 @@
 {
   "name": "@tasul/shuffle-text",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "JavaScript library for text switching effects",
   "main": "shuffleText.js",
   "scripts": {

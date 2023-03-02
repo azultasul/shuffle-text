@@ -53,9 +53,9 @@
   
   ShuffleText.prototype.replaceText = function() {
     const _ = this;
-    clearTimeout(_.setReplaceTimeout)
+    clearTimeout(_.data.setReplaceTimeout)
     _.data.playIndex.forEach((text, index) => {
-      _.setReplaceTimeout = setTimeout(() => {
+      _.data.setReplaceTimeout = setTimeout(() => {
         _.data.currentSay[text] = `<span>${_.data.nextText[text]}</span>`
         
         if (index == (_.data.playIndex.length - 1)) {
@@ -127,8 +127,8 @@
 
   ShuffleText.prototype.playAuto = function() {
     const _ = this;
-    clearTimeout(_.setAutoTimeout)
-    _.setAutoTimeout = setTimeout(() => {
+    clearTimeout(_.data.setAutoTimeout)
+    _.data.setAutoTimeout = setTimeout(() => {
       _.play();
       _.playAuto();
     }, _.data.totalReplaceTime + (_.settings.stayTime));
