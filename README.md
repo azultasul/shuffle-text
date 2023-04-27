@@ -1,10 +1,10 @@
 # ShuffleText
 
 'ShuffleText' is a JavaScript library for text switching effects.  
-You can switch any words or sentences you want to show randomly or in order.
+You can switch any words or sentences you want to show randomly or in order.  
 
 ## 📌 Install
-
+https://www.npmjs.com/package/@tasul/shuffle-text  
 ```jsx
 npm i @tasul/shuffle-text
 ```
